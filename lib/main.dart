@@ -1,37 +1,46 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_application_1/options.dart';
+import './question.dart';
+import './options.dart';
 
 void main() {
-  runApp(MyApp());
+  runApp(const MyApp());
 }
 
-class MyApp extends StatelessWidget {
-  void quizlet(){
-    print('this is a quizlet');
+class MyApp extends StatefulWidget {
+  const MyApp({Key? key}) : super(key: key);
+
+  @override
+  State<MyApp> createState() => _MyAppState();
+}
+
+class _MyAppState extends State<MyApp> {
+  var questionIndex = 0;
+  void quizlet() {
+    setState(() {
+      questionIndex++;
+    });
   }
+
+  var questions = [
+    'Your fvrt Programming Language',
+    'Your fvrt Country',
+    'Your Career'
+  ];
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
       home: Scaffold(
-        appBar: AppBar(
-          title: const Text('My First APP'),
-        ),
-        body: Column(children:  [
-         Text('This is quiz 1'),
-          RaisedButton(
-            onPressed: quizlet,
-            child: const Text('question 1'),
+          appBar: AppBar(
+            title: const Text('My First APP'),
           ),
-          const RaisedButton(
-            onPressed: null,
-            child: Text('question 2'),
-          ),
-          const RaisedButton(
-            onPressed: null,
-            child: Text('question 3'),
-          ),
-        ]),
-        backgroundColor: const Color.fromARGB(226, 202, 202, 202),
-      ),
+          body: Column(children: [
+            Question(questions[questionIndex]),
+            Options(quizlet),
+            Options(quizlet),
+            Options(quizlet)
+          ]),
+          backgroundColor: const Color.fromARGB(255, 235, 247, 246)),
     );
   }
 }
