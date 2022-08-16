@@ -40,7 +40,7 @@ class _MyAppState extends State<MyApp> {
             Options(quizlet),
             Options(quizlet)
           ]),
-          backgroundColor: const Color.fromARGB(255, 235, 247, 246)),
+          backgroundColor: Color.fromARGB(255, 204, 204, 204)),
     );
   }
 }
