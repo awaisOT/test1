@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_application_1/options.dart';
-import './question.dart';
-import './options.dart';
+import './quiz_form.dart';
 
 void main() {
   runApp(const MyApp());
@@ -22,10 +20,30 @@ class _MyAppState extends State<MyApp> {
     });
   }
 
+  void resetQuiz() {
+    setState(() {
+      questionIndex = 0;
+    });
+  }
+
   var questions = [
-    'Your fvrt Programming Language',
-    'Your fvrt Country',
-    'Your Career'
+    {
+      "questionText": "Your fvrt Programming Language",
+      "optionsText": ["Python", "c++", "Js", "Dart"],
+    },
+    {
+      "questionText": "Your fvrt Country",
+      "optionsText": ["Pakistan", "South Korea", "Indonesia", "Saudi Arabia"],
+    },
+    {
+      "questionText": "Your Career",
+      "optionsText": [
+        "Developer",
+        "Researcher",
+        "Business",
+        "None of the Above"
+      ],
+    },
   ];
   @override
   Widget build(BuildContext context) {
@@ -34,13 +52,20 @@ class _MyAppState extends State<MyApp> {
           appBar: AppBar(
             title: const Text('My First APP'),
           ),
-          body: Column(children: [
-            Question(questions[questionIndex]),
-            Options(quizlet),
-            Options(quizlet),
-            Options(quizlet)
-          ]),
-          backgroundColor: Color.fromARGB(255, 204, 204, 204)),
+          body: questionIndex < questions.length
+              ? QuizForm(questionIndex, quizlet, questions)
+              : Center(
+                  child: Column(
+                    children: [
+                      const Text('You did it'),
+                      RaisedButton(
+                        onPressed: resetQuiz,
+                        child: const Text('reset Quiz'),
+                      )
+                    ],
+                  ),
+                ),
+          backgroundColor: const Color.fromARGB(255, 204, 204, 204)),
     );
   }
 }
